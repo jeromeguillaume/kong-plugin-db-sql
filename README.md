@@ -1,6 +1,5 @@
-# Kong plugin to access to Database
+# db-sql: Kong custom plugin
 This plugin uses the Lua library `luasql.mysql`
-
 
 ## What does the plugin?
 1) Get a JWT from ```Authorization: Bearer```
