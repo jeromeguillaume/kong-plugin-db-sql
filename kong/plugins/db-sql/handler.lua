@@ -98,7 +98,10 @@ function plugin:access(plugin_conf)
     --    kong.log.notice(row[1], row[2])
     --    row = cursor:fetch({})
     -- end
-    local nb_rows = cursor:numrows()
+    local nb_rows = 0
+    if cursor ~= nill then
+        nb_rows = cursor:numrows()
+    end
 
     -- close the cursor
     if cursor ~= nil then
