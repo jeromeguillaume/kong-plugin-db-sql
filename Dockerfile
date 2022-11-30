@@ -6,7 +6,7 @@ USER root
 #COPY /kong/plugins/db-sql/* /usr/local/share/lua/5.1/kong/plugins/db-sql/
 
 RUN apk update && apk add git musl-dev libffi-dev gcc g++ file make
-RUN apk add mysql mariadb-dev
+RUN apk add mariadb-dev
 RUN luarocks install luasql-mysql MYSQL_INCDIR=/usr/include/mysql
 
 # reset back the defaults

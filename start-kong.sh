@@ -13,7 +13,7 @@ docker rm -f kong-gateway-db-sql >/dev/null
 docker run -d --name kong-gateway-db-sql \
 --network=kong-net \
 --link kong-database-db-sql:kong-database-db-sql \
---mount type=bind,source=/Users/jeromeg/Documents/Kong/Tips/kong-db-sql/kong/plugins/db-sql,destination=/usr/local/share/lua/5.1/kong/plugins/db-sql \
+--mount type=bind,source=/Users/jeromeg/Documents/Kong/Tips/kong-plugin-db-sql/kong/plugins/db-sql,destination=/usr/local/share/lua/5.1/kong/plugins/db-sql \
 -e "KONG_DATABASE=postgres" \
 -e "KONG_PG_HOST=kong-database-db-sql" \
 -e "KONG_PG_USER=kong" \

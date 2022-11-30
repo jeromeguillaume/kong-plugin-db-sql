@@ -98,7 +98,26 @@ function plugin:access(plugin_conf)
     --    kong.log.notice(row[1], row[2])
     --    row = cursor:fetch({})
     -- end
-    if cursor:numrows() == 0 then
+    local nb_rows = cursor:numrows()
+
+    -- close the cursor
+    if cursor ~= nil then
+        local rc = cursor:close()
+        kong.log.notice("Close the MySQL cursor: " .. tostring(rc))
+    end
+    -- close the MySQL connection
+    if con ~= nil then
+        local rc = con:close()
+        kong.log.notice("Close the MySQL connection: " .. tostring(rc))
+    end
+    -- close the environment MySQL object
+    if env ~= nil then
+        local rc = env:close()
+        kong.log.notice("Close the environment MySQL object: " .. tostring(rc))
+    end
+
+    -- If we don't found the client_id in MySQL
+    if nb_rows == 0 then
         kong.log.err ( "Failure to get client_id '" .. client_id .. "' in MySQL")
         return kong.response.exit(500, "{\
             \"Error Message\": \"Failure to get client_id in MySQL\"\
