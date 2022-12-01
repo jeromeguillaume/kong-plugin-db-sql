@@ -1,5 +1,8 @@
 # db-sql: Kong custom plugin
-This plugin uses the Lua library `luasql.mysql`
+This plugin uses the Lua library `luasql.mysql` which enables Kong to:
+- Connect to ODBC, ADO, Oracle, MySQL, SQLite, Firebird and PostgreSQL databases
+- Execute arbitrary SQL statements
+- Retrieve results in a row-by-row cursor fashion
 
 ## What does the plugin?
 1) Get a JWT from ```Authorization: Bearer```
