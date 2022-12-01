@@ -87,22 +87,27 @@ function plugin:access(plugin_conf)
             plugin_conf.host       .. ", " ..
             plugin_conf.port       .. 
             "'")
-    local con = assert (env:connect(plugin_conf.sourcename, plugin_conf.username, plugin_conf.password, plugin_conf.host,  plugin_conf.port))
-
-    -- execute SQL query
-    local query = "SELECT client_id, client_secret FROM clients WHERE client_id = '" .. client_id .. "'"
-    kong.log.notice("SQL query: " .. query)    
-    local cursor = con:execute(query)
-    -- local row = cursor:fetch({})
-    -- while row do
-    --    kong.log.notice(row[1], row[2])
-    --    row = cursor:fetch({})
-    -- end
+    local con = env:connect(plugin_conf.sourcename, plugin_conf.username, plugin_conf.password, plugin_conf.host,  plugin_conf.port)
     local nb_rows = 0
-    if cursor ~= nill then
-        nb_rows = cursor:numrows()
-    end
+    local cursor
 
+    -- If the connection is successful
+    if con ~= nil then
+        -- execute SQL query
+        local query = "SELECT client_id, client_secret FROM clients WHERE client_id = '" .. client_id .. "'"
+        kong.log.notice("SQL query: " .. query)    
+        cursor = con:execute(query)
+        -- local row = cursor:fetch({})
+        -- while row do
+        --    kong.log.notice(row[1], row[2])
+        --    row = cursor:fetch({})
+        -- end
+        if cursor ~= nil then
+            nb_rows = cursor:numrows()
+        end
+    else
+        kong.log.err ( "Failure to connect to MySQL")
+    end
     -- close the cursor
     if cursor ~= nil then
         local rc = cursor:close()
