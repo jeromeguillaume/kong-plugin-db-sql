@@ -11,7 +11,7 @@
 # Create a route /httpbin and configure & apply the plugin
 # http :8000/httpbin Authorization:' Bearer <bearer-with-a-client_id-claim'
 
-# remove the previous container
+# Remove the previous container
 docker rm -f kong-gateway-db-sql >/dev/null
 
 docker run -d --name kong-gateway-db-sql \
