@@ -1,6 +1,7 @@
 # Start MySQL 6.5
 # docker run --detach --name=mysql --env="MYSQL_ROOT_PASSWORD=mypassword" --network=kong-net --publish 3306:3306 mysql
 # 
+# Connect to DB and populate the DB
 # mysql -uroot -p -h 127.0.0.1 -P 3306
 #    CREATE DATABASE clients CHARACTER SET utf8 COLLATE utf8_general_ci;
 #    use clients;
